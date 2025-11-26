@@ -11,7 +11,7 @@ function changeColor(colorName, newImg) {
         console.log("Color switched to: " + colorName);
 
         // update image
-        document.getElementById("default-image").src = newImg;
+        document.getElementById("productImage").src = newImg;
 
         // update color text if exists
         const currentColor = document.getElementById("current-color");
