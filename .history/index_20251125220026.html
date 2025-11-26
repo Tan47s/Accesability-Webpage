@@ -27,32 +27,17 @@
         <!-- Product Spotlight Section -->
         <section id="product-spotlight" class="product-section">
             <div class="product-layout">
-                <!-- modified image -->
-                <div class = "Product-image">                    
-                    <img id="default-image" src = "https://smartwatch-straps.co.uk/cdn/shop/files/zwart_b0353297-f6f7-4c34-970d-a214b41f9507.jpg?v=1725032130" class="def-image" alt="Product">
-                    
-                    <a href="https://smartwatch-straps.co.uk/cdn/shop/files/zwart_b0353297-f6f7-4c34-970d-a214b41f9507.jpg?v=1725032130" 
-                    target="_blank"
-                    class="view-image">
-                    View Product Image
+                <div>
+                    <a href="#full-res" style="display: block;">
+                        <a href="https://smartwatch-straps.co.uk/cdn/shop/files/zwart_b0353297-f6f7-4c34-970d-a214b41f9507.jpg?v=1725032130" target="_blank" style="display: block; text-align: center; margin-top: 4px; font-size: 0.875rem; color: var(--brand-blue); text-decoration: none;">
+  View Product Image
                     </a>
-
-                    <div class="color-options">
-                        <div class="color-circle" 
-                            data-img="https://placehold.co/400x400/1e3a8a/f0f0f0?text=Product+Blue"
-                            style="background:#1e3a8a;">
-                        </div>
-
-                        <div class="color-circle" 
-                            data-img="https://placehold.co/400x400/dc2626/f0f0f0?text=Product+Red"
-                            style="background:#dc2626;">
-                        </div>
-
-                        <div class="color-circle" 
-                            data-img="https://placehold.co/400x400/111827/f0f0f0?text=Product+Black"
-                            style="background:#111827;">
-                        </div>
-                </div>
+                    <div style="display: flex; margin-top: 16px; gap: 12px; justify-content: center;">
+                        <span style="font-size: 0.875rem; font-weight: 600;">Color: <span id="current-color">Blue</span></span>
+                        <span onclick="changeColor('Black')" style="height: 24px; width: 24px; background-color: #1f2937; border-radius: 9999px; cursor: pointer;" title="Black color option"></span>
+                        <span onclick="changeColor('White')" style="height: 24px; width: 24px; background-color: #e5e7eb; border-radius: 9999px; cursor: pointer;" title="White color option"></span>
+                        <span id="buy-now-btn" onclick="changeColor('Red')" style="height: 24px; width: 24px; background-color: #dc2626; border-radius: 9999px; cursor: pointer;" title="Red color option"></span>
+                    </div>
                 </div>
 
                 <div style="display: flex; flex-direction: column; gap: 1.5rem;">

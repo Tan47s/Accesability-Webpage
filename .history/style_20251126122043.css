@@ -120,9 +120,8 @@ body {
     transition: transform 0.2s ease;
 }
 .view-image{
-   position: relative;
-   left: 125px;
-   margin-bottom:10px;
+    position: relative;
+    left : 100px
 }
 
 

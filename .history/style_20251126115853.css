@@ -99,7 +99,6 @@ body {
     margin:1%;
 }
 .def-image{
-    margin: 10%;
     width: 350px;
     height: 350px;
     object-fit: contain;
@@ -110,19 +109,6 @@ body {
     display: flex;
     justify-content: center;
     gap: 15px;
-}
-.color-circle {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    cursor: pointer;
-    border: 2px solid #ddd;
-    transition: transform 0.2s ease;
-}
-.view-image{
-   position: relative;
-   left: 125px;
-   margin-bottom:10px;
 }
 
 
