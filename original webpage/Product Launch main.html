@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Launch</title>
+    <style>
+        :root {
+            --brand-blue: #1e3a8a;
+            --light-blue-text: #bfdbfe;
+            --low-contrast-red: #f87171;
+            --dark-gray: #4b5563;
+        }
+
+        :focus {
+            outline: none;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            font-size: 16px; 
+            background-color: #f3f4f6;
+            line-height: 1.5;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 896px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+
+        .header {
+            background-color: var(--brand-blue);
+            color: white;
+            padding-top: 1rem; /* py-4 */
+            padding-bottom: 1rem; /* py-4 */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-xl */
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .flex-row-center {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .product-section {
+            background-color: white;
+            padding: 32px;
+            border-radius: 16px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            margin-bottom: 32px;
+        }
+        
+        .product-layout {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        @media (min-width: 768px) {
+            .product-layout {
+                flex-direction: row;
+            }
+            .product-layout > div {
+                width: 50%;
+            }
+        }
+
+        .search-input {
+            padding: 8px;
+            font-size: 0.875rem;
+            color: #1f2937;
+            border-radius: 8px;
+            border: 1px solid #d1d5db;
+        }
+        .search-input::placeholder {
+            color: #d1d5db;
+            opacity: 1; 
+        }
+
+        .justified-text {
+            text-align: justify;
+        }
+
+        .sale-indicator {
+            color: var(--low-contrast-red);
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .low-contrast-button {
+            background-color: #3b82f6;
+            color: var(--light-blue-text);
+            display: block;
+            text-align: center;
+            padding: 1rem;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
+            transition: all 0.2s;
+            font-size: 1.25rem;
+        }
+        .low-contrast-button:hover {
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .input-style {
+            padding: 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            width: 100%;
+        }
+        .input-style:focus {
+            border-color: var(--brand-blue);
+            box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.5);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+        @media (min-width: 768px) {
+            .features-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        .feature-card {
+            padding: 16px;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        }
+        
+        footer {
+            background-color: #1f2937;
+            color: #9ca3af;
+            padding-top: 24px;
+            padding-bottom: 24px;
+            margin-top: 32px;
+        }
+
+        .review-divider {
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 16px;
+            margin-bottom: 16px;
+        }
+        .review-author-img {
+            border-radius: 9999px;
+            margin-right: 12px;
+        }
+        
+        .main-content {
+            padding: 24px;
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+    </style>
+    
+    <script>
+
+        function addToCart() {
+            const cartStatus = document.getElementById('cart-status');
+            cartStatus.textContent = "Item added to cart! Proceed to checkout.";
+            cartStatus.style.display = 'block';
+            cartStatus.style.backgroundColor = '#d1fae5';
+            cartStatus.style.color = '#065f46';
+            cartStatus.style.border = '1px solid #065f46'; 
+        }
+
+        function changeColor(colorName) {
+            console.log("Color switched to: " + colorName);
+            document.getElementById('product-image').src = `https://placehold.co/400x400/1e3a8a/f0f0f0?text=Product+${colorName.toUpperCase()}`;
+            document.getElementById('current-color').textContent = colorName;
+        }
+        
+        window.onload = function() {
+            document.getElementById('next-product-span').addEventListener('click', function() {
+                alert('Viewing next product (non-focusable)'); 
+            });
+        }
+    </script>
+</head>
+<body>
+
+    <div class="header">
+        <div class="container flex-row-center">
+            <h2 style="font-size: 2.25rem; font-weight: 800; letter-spacing: -0.05em;">Product X</h2>
+            
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <input type="search" placeholder="Search products..." class="search-input" title="Search input">
+                
+                <button style="color: white; border: none; background: none; cursor: pointer;">
+                    <svg xmlns="http://www.w3.org/2000/svg" style="height: 24px; width: 24px;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <main class="container main-content" style="padding-top: 24px; padding-bottom: 24px; margin-top: 0; margin-bottom: 0;">
+        
+        <section id="product-spotlight" class="product-section">
+            
+            <div class="product-layout">
+                <div>
+                    <a href="#full-res" style="display: block;">
+                        <img id="product-image" src="https://placehold.co/400x400/1e3a8a/f0f0f0?text=Product+BLUE" alt="" style="border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06); width: 100%; height: auto;">
+                        <span style="display: block; text-align: center; margin-top: 4px; font-size: 0.875rem; color: var(--brand-blue);">View Product Image</span>
+                    </a>
+                    
+                    <div style="display: flex; margin-top: 16px; gap: 12px; justify-content: center;">
+                        <span style="font-size: 0.875rem; font-weight: 600;">Color: <span id="current-color">Blue</span></span>
+                        
+                        <span onclick="changeColor('Black')" style="height: 24px; width: 24px; background-color: #1f2937; border-radius: 9999px; cursor: pointer; box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);" title="Black color option"></span>
+                        
+                        <span onclick="changeColor('White')" style="height: 24px; width: 24px; background-color: #e5e7eb; border-radius: 9999px; cursor: pointer; box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);" title="White color option"></span>
+                        
+                        <span id="buy-now-btn" onclick="changeColor('Red')" style="height: 24px; width: 24px; background-color: #dc2626; border-radius: 9999px; cursor: pointer; box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);" title="Red color option"></span>
+                    </div>
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+                    
+                    <p class="sale-indicator" title="Current Discount">Sale! 40% OFF Today.</p>
+                    
+                    <p style="font-size: 3rem; font-weight: 800; color: #111827;">$299.00</p>
+                    
+                    <div style="color: #4b5563;" tabindex="10">
+                        <p>Experience the future on your wrist with the Product X Ultra. Featuring an all-day battery and advanced health monitoring.</p>
+                    </div>
+
+                    <div style="display: flex; align-items: center; gap: 0.5rem; padding-top: 1rem;">
+                        <label for="config-id">Hidden Configuration ID:</label>
+                        <input type="hidden" id="config-id" value="ZXU221">
+                    </div>
+
+                    <select id="size-select" class="input-style">
+                        <option value="">-- Select Size --</option>
+                        <option value="42mm">42mm (Standard)</option>
+                        <option value="46mm">46mm (Large)</option>
+                    </select>
+                    
+                    <input type="number" id="quantity" class="input-style" placeholder="Quantity (Required)" min="1" value="1">
+
+                    <div style="margin-top: 1rem; display: flex; flex-direction: column; gap: 0.5rem;">
+                        <p style="font-weight: 500;">Strap Material:</p>
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <input type="radio" name="strap" id="strap-silicone" value="silicone" style="height: 16px; width: 16px; color: var(--brand-blue);">
+                            <label for="strap-silicone">Silicone Sport</label>
+
+                            <input type="radio" name="strap" id="strap-leather" value="leather" style="height: 16px; width: 16px; color: var(--brand-blue);">
+                            <span>Leather Classic</span>
+                        </div>
+                    </div>
+
+                    <div id="buy-now-btn" class="low-contrast-button"
+                        onclick="addToCart()" accesskey="b" role="button" tabindex="0">
+                        Add to Cart
+                    </div>
+                    
+                    <div id="cart-status" style="display: none; padding: 12px; border-radius: 8px; text-align: center; font-weight: 600; margin-top: 16px;"></div>
+                </div>
+            </div>
+        </section>
+
+        <div id="features" class="product-section" style="margin-bottom: 0;">
+            <h3 style="font-size: 1.875rem; font-weight: 600; color: var(--brand-blue); margin-bottom: 1.5rem;">Core Features</h3>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <p style="font-size: 1.25rem; font-weight: 500;">1. Always-On Display</p>
+                    <p style="font-size: 0.875rem; color: #4b5563; margin-top: 4px;">Check your metrics at a glance, day or night.</p>
+                </div>
+                <div class="feature-card">
+                    <img src="https://placehold.co/50x50/f97316/ffffff?text=H" style="float: right;">
+                    <p style="font-size: 1.25rem; font-weight: 500;">2. Ultra Health Monitoring</p>
+                    <p style="font-size: 0.875rem; color: #4b5563; margin-top: 4px;">ECG, Sleep Tracking, and Blood Oxygen.</p>
+                </div>
+                <div class="feature-card">
+                    <p style="font-size: 1.25rem; font-weight: 500;">3. Waterproof Design</p>
+                    <p style="font-size: 0.875rem; color: #4b5563; margin-top: 4px;">Rated IP68 for swimming and harsh conditions.</p>
+                </div>
+            </div>
+            
+            <p style="font-size: 0.875rem; margin-top: 2rem; color: #6b7280;" class="justified-text">
+                The Product X Smartwatch represents a major leap in wearable technology. We've redesigned the chip architecture for 50% better performance while maintaining its slim profile. This focus on efficiency ensures that your device keeps pace with your demanding schedule, offering reliability when you need it most.
+            </p>
+        </div>
+
+        <section id="reviews" class="product-section">
+            <h3 style="font-size: 1.875rem; font-weight: 600; color: var(--brand-blue); margin-bottom: 1.5rem;">What People Are Saying</h3>
+            
+            <div class="review-divider">
+                <h6 style="font-size: 1.125rem; font-weight: 500;">"Best Smartwatch on the market."</h6>
+                
+                <p style="font-size: 0.875rem; color: #4b5563; margin-top: 4px;">
+                    I found the battery life to be incredibly <b style="color: #059669;">long-lasting</b> and the OS very <i>intuitive</i>.
+                </p>
+                
+                <div style="display: flex; align-items: center; margin-top: 12px;">
+                    <img src="https://placehold.co/50x50/d1d5db/374151?text=A" alt="picture" class="review-author-img">
+                    <p style="font-size: 0.875rem; font-weight: 600;">Alex M.</p>
+                </div>
+            </div>
+
+            <div class="review-divider">
+                <h6 style="font-size: 1.125rem; font-weight: 500;">"A solid upgrade."</h6>
+                <p style="font-size: 0.875rem; color: #4b5563; margin-top: 4px;">Worth the money if you're looking for advanced fitness tracking capabilities.</p>
+            </div>
+            
+            <span id="next-product-span" style="font-size: 0.875rem; font-weight: 700; color: var(--brand-blue); cursor: pointer; margin-top: 16px; display: block;">
+                View All 4,500 Reviews &gt;
+            </span>
+        </section>
+
+        <section id="tech-specs" class="product-section">
+            <h3 style="font-size: 1.875rem; font-weight: 600; color: var(--brand-blue); margin-bottom: 1.5rem;">Technical Specifications</h3>
+            
+            <table style="width: 100%; text-align: left; border-collapse: collapse; border: 1px solid #e5e7eb;">
+                <thead>
+                    <tr style="background-color: #f9fafb;">
+                        <th style="border: 1px solid #e5e7eb; padding: 12px; font-weight: 500;">Feature</th>
+                        <th style="border: 1px solid #e5e7eb; padding: 12px; font-weight: 500;">Detail</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="border: 1px solid #e5e7eb; padding: 12px;">Storage</td>
+                        <td style="border: 1px solid #e5e7eb; padding: 12px;">32 GB</td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid #e5e7eb; padding: 12px;">Battery</td>
+                        <td style="border: 1px solid #e5e7eb; padding: 12px;">Up to 7 days</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+        </section>
+        
+        <section id="promo" class="product-section">
+            <h3 style="font-size: 1.875rem; font-weight: 600; color: var(--brand-blue); margin-bottom: 1.5rem;">Product Unboxing</h3>
+
+            <img src="https://placehold.co/400x100/1e3a8a/60a5fa?text=Limited+Time+Offer+-+Free+Shipping" alt="" style="border-radius: 8px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); margin-bottom: 1rem; width: 100%; height: auto;">
+            
+            <p style="font-size: 0.875rem; color: #6b7280; margin-bottom: 8px;">Watch a full product demonstration:</p>
+            <iframe width="100%" height="250" src="https://www.youtube.com/embed/S_T10uPq65g" frameborder="0" allowfullscreen></iframe>
+            
+        </section>
+        
+        <div style="display: flex; justify-content: center; align-items: center; padding-top: 24px; padding-bottom: 24px;">
+            <button style="background-color: #d1d5db; padding: 12px; border-radius: 9999px; border: none; cursor: pointer; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);" 
+                onmouseover="this.style.backgroundColor='#9ca3af'" onmouseout="this.style.backgroundColor='#d1d5db'">
+                <span style="color: var(--dark-gray);">&#128276;</span> 
+            </button>
+            
+            <a href="#search" style="margin-left: 1rem; margin-right: 1rem; height: 10px; width: 10px;"></a>
+            
+            <p style="font-size: 0.875rem; font-weight: 600; margin-right: 1rem;">
+                &#128717; Free 30-Day Returns.
+            </p>
+        </div>
+
+        <div style="text-align: center; margin-top: 24px;">
+            <p style="font-size: 1.125rem; font-weight: 500; color: var(--brand-blue);">Need help?</p>
+            
+            <span onclick="console.log('Email support clicked');" style="color: var(--brand-blue); text-decoration: underline; cursor: pointer;">Email Customer Support</span>
+            
+            <a style="margin-left: 1rem; color: var(--brand-blue); text-decoration: underline;">Find a Store</a>
+        </div>
+
+    </main>
+
+    <footer>
+        <div class="container" style="text-align: center;">
+            <p>&copy; 2025 Product Tech. All rights reserved.</p>
+            
+            <p style="font-size: 0.75rem; margin-top: 8px;">
+                Review our full policy. <a href="/warranty" target="_blank" style="color: #9ca3af; text-decoration: underline;">More Details</a>.
+            </p>
+
+            <div style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin-top: 8px;">
+                <input type="checkbox" name="terms-agree" style="height: 16px; width: 16px; color: var(--brand-blue); border-radius: 4px;">
+                <span>I agree to the Terms of Service.</span>
+            </div>
+            
+        </div>
+    </footer>
+    
+</body>
+</html>

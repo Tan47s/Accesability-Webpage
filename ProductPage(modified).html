@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en"> <!--added lang attribute -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Launch</title>
+    <style>
+        :root {
+            --brand-blue: #1e3a8a;
+            --light-blue-text: #ffffff;
+            --low-contrast-red: #111111; /*improved contrast */
+            --dark-gray: #4b5563;
+        }
+
+        :focus { outline: none; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            background-color: #f3f4f6;
+            line-height: 1.5;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 896px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+
+        .header {
+            background-color: var(--brand-blue);
+            color: white;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1),
+                        0 4px 6px -2px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .flex-row-center {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .product-section {
+            background-color: #ffffff;
+            padding: 32px;
+            border-radius: 16px;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1),
+                        0 4px 6px -2px rgba(0,0,0,0.05);
+            margin-bottom: 32px;
+        }
+
+        .product-layout {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        @media (min-width: 768px) {
+            .product-layout {
+                flex-direction: row;
+            }
+            .product-layout > div {
+                width: 50%;
+            }
+        }
+
+        .search-input {
+            padding: 8px;
+            font-size: 0.875rem;
+            color: #1f2937;
+            border-radius: 8px;
+            border: 1px solid #d1d5db;
+        }
+
+        .justified-text { text-align: justify; }
+
+        .sale-indicator {
+            color: var(--low-contrast-red);
+            font-size: 1rem;
+            font-weight: bold;
+        }
+
+        .Produt-title { font-size: 48px; margin: 1%; }
+        .Price { font-size: 26px; margin: 1%; }
+
+        .def-image {
+            margin: 10%;
+            width: 350px;
+            height: 350px;
+            object-fit: contain;
+            border-radius: 20px;
+        }
+
+        .color-options {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .color-circle {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid #ddd;
+            transition: transform 0.2s ease;
+        }
+
+        .view-image {
+            position: relative;
+            left: 125px;
+            margin-bottom: 10px;
+        }
+
+        .low-contrast-button {
+            background-color: #3b82f6;
+            color: var(--light-blue-text);
+            display: block;
+            text-align: center;
+            padding: 1rem;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.25rem;
+        }
+
+        .input-style {
+            padding: 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            width: 100%;
+        }
+
+        .main-content {
+            padding: 24px;
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+    </style>
+
+</head>
+<body>
+
+    <div class="header">
+        <div class="container flex-row-center">
+            <h2 style="font-size: 2.25rem; font-weight: 800;">Product X</h2>
+
+            <div style="display: flex; align-items: center; gap: 1.5rem;"> <!-- MODIFIED -->
+
+                <input type="search" 
+                       class="search-input" 
+                       placeholder="Search products..." 
+                       title="Search products"
+                       style="width: 220px;"> <!-- MODIFIED -->
+
+                <button onclick="runSearch()" aria-label="Search button" 
+                        style="background:none; border:none; cursor:pointer; color:white;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
+                        fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </button>
+
+                <button aria-label="Cart" style="background:none; border:none; cursor:pointer; color:white;">
+                    <svg xmlns="http://www.w3.org/2000/svg" style="height:24px;width:24px;" fill="none"
+                         viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" 
+                              d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13
+                                  L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17
+                                  m0 0a2 2 0 100 4 2 2 0 000-4
+                                  m-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                </button>
+
+            </div>
+        </div>
+    </div>
+
+    <main class="container main-content">
+
+
+        <section id="product-spotlight" class="product-section">
+            <div class="product-layout">
+
+                <div class="Product-image">
+                    <img id="default-image"
+                        src="https://smartwatch-straps.co.uk/cdn/shop/files/zwart_b0353297-f6f7-4c34-970d-a214b41f9507.jpg?v=1725032130"
+                        class="def-image" alt="Product">
+
+                    <a href="https://smartwatch-straps.co.uk/cdn/shop/files/zwart_b0353297-f6f7-4c34-970d-a214b41f9507.jpg?v=1725032130"
+                        target="_blank" class="view-image">
+                        View Product Image
+                    </a>
+
+                    <div class="color-options">
+                        <div class="color-circle"
+                            data-img="https://smartwatch-straps.co.uk/cdn/shop/files/donkerblauw_d25abeb5-d6a6-41f2-b02a-d47b17d8ccf4.jpg?v=1725032229&width=600"
+                            data-color="Blue" style="background:#1e3a8a;"></div>
+
+                        <div class="color-circle"
+                            data-img="https://smartwatch-straps.co.uk/cdn/shop/files/rood_c1f84d11-1299-4c18-b778-5f294b51209f.jpg?v=1725032151&width=600"
+                            data-color="Red" style="background:#dc2626;"></div>
+
+                        <div class="color-circle"
+                            data-img="https://smartwatch-straps.co.uk/cdn/shop/files/zwart_b0353297-f6f7-4c34-970d-a214b41f9507.jpg?v=1725032130"
+                            data-color="Black" style="background:#111827;"></div>
+                    </div>
+                </div>
+
+                <div style="display:flex;flex-direction:column;gap:1.5rem;">
+                    <h1 class="sale-indicator">Sale! 40% OFF Today.</h1>
+                    <h1 class="Produt-title">Product X pro 2</h1>
+                    <h1 class="Price">Price - 299$</h1>
+
+                    <p>Experience the future on your wrist with the Product X Ultra...</p>
+
+                    <select id="size-select" class="input-style">
+                        <option value="">-- Select Size --</option>
+                        <option value="42mm">42mm (Standard)</option>
+                        <option value="46mm">46mm (Large)</option>
+                    </select>
+
+                    <div id="buy-now-btn" class="low-contrast-button" onclick="addToCart()">
+                        Add to Cart
+                    </div>
+
+                    <div id="cart-status" style="display:none;"></div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <section id="features" class="product-section">
+            <h2 style="font-size:1.875rem;font-weight:600;color:var(--brand-blue); margin-bottom:1.5rem;">
+                Core Features
+            </h2> <!-- fixed heading skip -->
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <p style="font-size:1.25rem;font-weight:500;">1. Always-On Display</p>
+                    <p style="font-size:0.875rem;color:#4b5563;">Check your metrics at a glance, day or night.</p>
+                </div>
+
+                <div class="feature-card">
+                    <p style="font-size:1.25rem;font-weight:500;">2. Ultra Health Monitoring</p>
+                    <p style="font-size:0.875rem;color:#4b5563;">ECG, Sleep Tracking, and Blood Oxygen.</p>
+                </div>
+
+                <div class="feature-card">
+                    <p style="font-size:1.25rem;font-weight:500;">3. Waterproof Design</p>
+                    <p style="font-size:0.875rem;color:#4b5563;">Rated IP68 for swimming and harsh conditions.</p>
+                </div>
+            </div>
+
+            <p style="font-size:0.875rem;margin-top:2rem;color:#6b7280;" class="justified-text">
+                The Product X Smartwatch represents a major leap in wearable technology...
+            </p>
+        </section>
+
+
+        <section id="reviews" class="product-section">
+            <h3 style="font-size:1.875rem;font-weight:600;color:var(--brand-blue);margin-bottom:1.5rem;">
+                What People Are Saying
+            </h3>
+
+            <div class="review-divider">
+                <h6 style="font-size:1.125rem;font-weight:500;">"Best Smartwatch on the market."</h6>
+                
+                <p style="font-size:0.875rem;color:#4b5563;margin-top:4px;">
+                    I found the battery life to be incredibly 
+                    <b style="color:#4b5563;">long-lasting</b> and the OS very <i>intuitive</i>.<!-- fixed contrast -->
+                </p>
+                
+                <div style="display:flex;align-items:center;margin-top:12px;">
+                    <img src="https://placehold.co/50x50/d1d5db/374151?text=A" 
+                         alt="picture" 
+                         class="review-author-img" 
+                         style="border-radius:9999px;margin-right:12px;">
+                    <p style="font-size:0.875rem;font-weight:600;">Alex M.</p>
+                </div>
+            </div>
+
+            <div class="review-divider">
+                <h6 style="font-size:1.125rem;font-weight:500;">"A solid upgrade."</h6>
+                <p style="font-size:0.875rem;color:#4b5563;margin-top:4px;">
+                    Worth the money if you're looking for advanced fitness tracking capabilities.
+                </p>
+            </div>
+            
+            <span id="next-product-span" 
+                  style="font-size:0.875rem;font-weight:700;color:var(--brand-blue);
+                         cursor:pointer;margin-top:16px;display:block;">
+                View All 4,500 Reviews &gt;
+            </span>
+        </section>
+
+
+        <section id="tech-specs" class="product-section">
+            <h3 style="font-size:1.875rem;font-weight:600;color:var(--brand-blue);margin-bottom:1.5rem;">
+                Technical Specifications
+            </h3>
+            
+            <table style="width:100%;text-align:left;border-collapse:collapse;border:1px solid #e5e7eb;">
+                <thead>
+                    <tr style="background-color:#f9fafb;">
+                        <th style="border:1px solid #e5e7eb;padding:12px;font-weight:500;">Feature</th>
+                        <th style="border:1px solid #e5e7eb;padding:12px;font-weight:500;">Detail</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="border:1px solid #e5e7eb;padding:12px;">Storage</td>
+                        <td style="border:1px solid #e5e7eb;padding:12px;">32 GB</td>
+                    </tr>
+                    <tr>
+                        <td style="border:1px solid #e5e7eb;padding:12px;">Battery</td>
+                        <td style="border:1px solid #e5e7eb;padding:12px;">Up to 7 days</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+ 
+        <section id="promo" class="product-section">
+            <h3 style="font-size:1.875rem;font-weight:600;color:var(--brand-blue);margin-bottom:1.5rem;">
+                Product Unboxing
+            </h3>
+
+            <img src="https://placehold.co/400x100/1e3a8a/60a5fa?text=Limited+Time+Offer+-+Free+Shipping" 
+                 alt="" 
+                 style="border-radius:8px;box-shadow:0 4px 6px -1px rgba(0,0,0,0.1);
+                        margin-bottom:1rem;width:100%;height:auto;">
+            
+            <p style="font-size:0.875rem;color:#6b7280;margin-bottom:8px;">
+                Watch a full product demonstration:
+            </p>
+
+            <iframe width="100%" height="250" 
+                    src="https://www.youtube.com/embed/S_T10uPq65g" 
+                    frameborder="0" allowfullscreen></iframe>
+        </section>
+
+        <div style="display:flex;justify-content:center;align-items:center;padding-top:24px;padding-bottom:24px;">
+            <button style="background-color:#d1d5db;padding:12px;border-radius:9999px;border:none;
+                           cursor:pointer;box-shadow:0 4px 6px -1px rgba(0,0,0,0.1);"
+                onmouseover="this.style.backgroundColor='#9ca3af'"
+                onmouseout="this.style.backgroundColor='#d1d5db'">
+                <span style="color:var(--dark-gray);">&#128276;</span> 
+            </button>
+            <p style="font-size:0.875rem;font-weight:600;margin-right:1rem;">
+                &#128717; Free 30-Day Returns.
+            </p>
+        </div>
+
+        <div style="text-align:center;margin-top:24px;">
+            <p style="font-size:1.125rem;font-weight:500;color:var(--brand-blue);">Need help?</p>
+            
+            <span onclick="console.log('Email support clicked');" 
+                  style="color:var(--brand-blue);text-decoration:underline;cursor:pointer;">
+                Email Customer Support
+            </span>
+            
+            <a style="margin-left:1rem;color:var(--brand-blue);text-decoration:underline;">
+                Find a Store
+            </a>
+        </div>
+
+    </main>
+
+
+    <footer>
+        <div class="container" style="text-align:center;">
+            <p>&copy; 2025 Product Tech. All rights reserved.</p>
+            
+            <p style="font-size:0.75rem;margin-top:8px;">
+                Review our full policy. 
+                <a href="/warranty" target="_blank" style="color:#4b5563;text-decoration:underline;">
+                    More Details
+                </a>.
+            </p>
+
+            <div style="display:flex;align-items:center;justify-content:center;gap:0.5rem;margin-top:8px;">
+            <label style="display: flex; align-items: center; gap: 0.5rem;">
+               <input type="checkbox" id="terms-agree" name="terms-agree">
+               <span>I agree to the Terms of Service.</span>
+           </label>
+
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function addToCart() {
+            const cartStatus = document.getElementById('cart-status');
+            cartStatus.textContent = "Item added to cart! Proceed to checkout.";
+            cartStatus.style.display = 'block';
+            cartStatus.style.backgroundColor = '#d1fae5';
+            cartStatus.style.color = '#065f46';
+            cartStatus.style.border = '1px solid #065f46';
+        }
+
+        function runSearch() {
+            const searchBox = document.querySelector('.search-input');
+            searchBox.focus();
+
+            if (searchBox.value.trim() !== "") {
+                console.log("Searching for:", searchBox.value);
+            } else {
+                console.log("Search triggered");
+            }
+        }
+
+        function changeColor(colorName, newImg) {
+            document.getElementById("default-image").src = newImg;
+
+            const currentColor = document.getElementById("current-color");
+            if (currentColor) currentColor.textContent = colorName;
+        }
+
+        const circles = document.querySelectorAll(".color-circle");
+        circles.forEach(circle => {
+            circle.addEventListener("click", () => {
+                const newImg = circle.getAttribute("data-img");
+                const colorName = circle.getAttribute("data-color");
+                changeColor(colorName, newImg);
+            });
+        });
+
+        window.onload = function() {
+            const nextBtn = document.getElementById('next-product-span');
+            if (nextBtn) {
+                nextBtn.addEventListener('click', function() {
+                    alert('Viewing next product');
+                });
+            }
+        }
+    </script>
+
+</body>
+</html>
